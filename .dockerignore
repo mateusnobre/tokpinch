@@ -1,0 +1,30 @@
+# Dependencies — reinstalled inside the build stages
+node_modules
+dashboard/node_modules
+
+# Environment secrets — never bake into the image
+.env
+.env.*
+
+# Version control
+.git
+.gitignore
+
+# Runtime data — mounted as a volume at /app/data
+data/
+
+# Tests
+tests/
+
+# Compiled output — built fresh inside the image
+dist/
+
+# Logs and OS noise
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Editor metadata
+.vscode
+.idea

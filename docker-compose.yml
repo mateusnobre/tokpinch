@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  tokpinch:
+    build: .
+    ports:
+      - "4100:4100"
+    environment:
+      - NODE_ENV=production
+      - DB_PATH=/app/data/tokpinch.db
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - DASHBOARD_PASSWORD=${DASHBOARD_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET:-}
+      - BUDGET_DAILY=${BUDGET_DAILY:-10.00}
+      - BUDGET_MONTHLY=${BUDGET_MONTHLY:-100.00}
+      - LOOP_DETECTION_ENABLED=${LOOP_DETECTION_ENABLED:-true}
+      - SMART_ROUTING_ENABLED=${SMART_ROUTING_ENABLED:-false}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - PROXY_RATE_LIMIT=${PROXY_RATE_LIMIT:-300}
+      # Optional: comma-separated allowed CORS origins in production
+      # - ALLOWED_ORIGINS=https://dash.example.com
+    volumes:
+      - tokpinch-data:/app/data
+    # Harden the container: read-only root fs + writable /tmp + no privilege escalation
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,noexec,nosuid
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:4100/"]
+      interval: 30s
+      timeout: 10s
+      start_period: 20s
+      retries: 3
+
+  # ---------------------------------------------------------------------------
+  # Example: run OpenClaw (or any Claude Code / Claude-compatible client)
+  # pointing at TokPinch as its Anthropic proxy. Uncomment and adjust image.
+  # ---------------------------------------------------------------------------
+  # openclaw:
+  #   image: openclaw/openclaw:latest
+  #   environment:
+  #     - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+  #     - ANTHROPIC_BASE_URL=http://tokpinch:4100/v1
+  #   depends_on:
+  #     tokpinch:
+  #       condition: service_healthy
+  #   restart: unless-stopped
+
+volumes:
+  tokpinch-data:

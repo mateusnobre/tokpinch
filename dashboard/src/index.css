@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: #09090B;
+    color-scheme: dark;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #18181B;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #3F3F46;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #52525B;
+  }
+}
+
+@layer utilities {
+  /* Shimmer skeleton */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      #27272A 25%,
+      #3F3F46 50%,
+      #27272A 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  /* Glow effects */
+  .glow-accent {
+    box-shadow: 0 0 20px rgba(230, 57, 70, 0.2);
+  }
+  .glow-success {
+    box-shadow: 0 0 20px rgba(0, 212, 170, 0.2);
+  }
+  .glow-warning {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+  }
+
+  /* Card hover transition */
+  .card-hover {
+    transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Grid background for login */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(63,63,70,0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(63,63,70,0.3) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Font utilities */
+  .font-head {
+    font-family: 'Outfit', sans-serif;
+  }
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}

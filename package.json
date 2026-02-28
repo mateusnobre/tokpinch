@@ -1,0 +1,48 @@
+{
+  "name": "tokpinch",
+  "version": "1.0.0",
+  "description": "API proxy for OpenClaw — tracks LLM costs and enforces budgets",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc && npm run dashboard:build",
+    "build:server": "tsc",
+    "start": "node dist/index.js",
+    "test": "vitest",
+    "audit": "npm audit",
+    "lint": "eslint src/",
+    "dashboard:dev": "cd dashboard && npm run dev",
+    "dashboard:build": "cd dashboard && npm run build"
+  },
+  "dependencies": {
+    "@fastify/cors": "^9.0.1",
+    "@fastify/rate-limit": "^9.1.0",
+    "@fastify/static": "^7.0.4",
+    "@fastify/websocket": "^10.0.1",
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^12.6.2",
+    "dotenv": "^17.3.1",
+    "fastify": "^4.27.0",
+    "jsonwebtoken": "^9.0.2",
+    "nanoid": "^5.0.7",
+    "nodemailer": "^8.0.1",
+    "pino": "^9.1.0",
+    "pino-pretty": "^11.1.0",
+    "undici": "^6.18.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20.14.0",
+    "@types/nodemailer": "^6.4.15",
+    "@types/ws": "^8.18.1",
+    "eslint": "^9.5.0",
+    "prettier": "^3.3.2",
+    "tsx": "^4.15.7",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  }
+}
