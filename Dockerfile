@@ -55,7 +55,6 @@ COPY --from=server-build /app/package.json ./
 # Create data directory for SQLite and set ownership before dropping privileges
 RUN mkdir -p /app/data && chown -R node:node /app
 
-VOLUME /app/data
 
 EXPOSE 4100
 
