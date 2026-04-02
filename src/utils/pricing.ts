@@ -15,7 +15,14 @@ export interface ModelPricing {
 // ---------------------------------------------------------------------------
 
 const PRICING_TABLE: Array<[string, ModelPricing]> = [
-  // Claude 4
+  // Claude 4.6 / 4.5 (current generation, April 2026)
+  ["claude-opus-4-6",   { inputPerM: 5,    outputPerM: 25,   cacheReadPerM: 0.50,  cacheWritePerM: 6.25  }],
+  ["claude-sonnet-4-6", { inputPerM: 3,    outputPerM: 15,   cacheReadPerM: 0.30,  cacheWritePerM: 3.75  }],
+  ["claude-opus-4-5",   { inputPerM: 5,    outputPerM: 25,   cacheReadPerM: 0.50,  cacheWritePerM: 6.25  }],
+  ["claude-sonnet-4-5", { inputPerM: 3,    outputPerM: 15,   cacheReadPerM: 0.30,  cacheWritePerM: 3.75  }],
+  ["claude-haiku-4-5",  { inputPerM: 1,    outputPerM: 5,    cacheReadPerM: 0.10,  cacheWritePerM: 1.25  }],
+  // Claude 4.1 / 4.0
+  ["claude-opus-4-1",   { inputPerM: 15,   outputPerM: 75,   cacheReadPerM: 1.50,  cacheWritePerM: 18.75 }],
   ["claude-opus-4",     { inputPerM: 15,   outputPerM: 75,   cacheReadPerM: 1.50,  cacheWritePerM: 18.75 }],
   ["claude-sonnet-4",   { inputPerM: 3,    outputPerM: 15,   cacheReadPerM: 0.30,  cacheWritePerM: 3.75  }],
   // Claude 3.5
