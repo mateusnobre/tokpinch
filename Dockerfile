@@ -55,6 +55,10 @@ COPY --from=server-build /app/package.json ./
 # Create data directory for SQLite and set ownership before dropping privileges
 RUN mkdir -p /app/data && chown -R node:node /app
 
+# Entrypoint that fixes volume permissions then drops to node user
+RUN printf '#!/bin/sh\nchown -R node:node /app/data\nexec su-exec node node dist/index.js\n' > /app/entrypoint.sh \
+  && chmod +x /app/entrypoint.sh \
+  && apk add --no-cache su-exec
 
 EXPOSE 4100
 
@@ -62,6 +66,4 @@ EXPOSE 4100
 HEALTHCHECK --interval=30s --timeout=10s --start-period=20s --retries=3 \
   CMD wget --spider -q http://localhost:4100/health || exit 1
 
-USER node
-
-CMD ["node", "dist/index.js"]
+CMD ["/app/entrypoint.sh"]
